@@ -1,2 +1,2 @@
 # Philosophers
-Learning the basics of threading a process: how to create threads and explore the use of mutexes.
+Basics of threading a process: Learn how to create threads and explore the use of mutexes.
