@@ -10,17 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+# include "philo.h"
 
 int	main(int argc, char **argv)
 {
-	unsigned int	time_start;
+	//unsigned int	time_start;
 
-	if (argc < 5)
+	if (argc < 5 || argc > 6)
 		return (print_error_args(1), 1);
-	(void)argv;
+	if (!philo_init(argv))
+		return (1);
 
-	time_start = get_time();
+	/*time_start = get_time();
 	printf("time_start = %d\n", time_start);
 	time_start = get_time();
 	printf("time_start = %d\n", time_start);
@@ -41,9 +42,58 @@ int	main(int argc, char **argv)
 	printf("time_start = %d\n", time_start);
 	usleep(1000);
 	time_start = get_time();
-	printf("time_start = %d\n", time_start);
-
+	printf("time_start = %d\n", time_start);*/
+	//cleanup function
 	return (0);
+}
+
+void	*routine()
+{
+	printf("thread \n");
+	return ((void *) 1);//temp solution, shouldn't be here.
+}
+
+int	create_threads(t_phargs *phargs)
+{
+	unsigned int	i;
+
+	phargs->philo = malloc(sizeof(pthread_t) * phargs->n_philos);
+	if (!phargs->philo)
+		return (0);
+	i = 0;
+	while (i < phargs->n_philos)
+	{
+		if (pthread_create((phargs->philo + i), NULL, &routine,  NULL) != 0)
+			return (perror("Failed to create thread"), 0);
+		printf("philosopher %d has started\n", i + 1);
+		i ++;
+	}
+	//add pthread_join loop here. Otherwise main continues and likely returns before threads finish doing their thing.
+	return (1);
+}
+
+int	philo_init(char **argv)
+{
+	t_phargs	phargs;
+
+	phargs.n_philos = atoi(argv[1]); //libft and atoi not allowed, so add atoi_protect inside philo project.
+	if (!phargs.n_philos)
+		return (0);
+	if (!create_threads(&phargs))
+		return (0);
+	phargs.time_die = atoi(argv[2]);
+	if (!phargs.time_die)
+		return (0);
+	if (!phargs.time_eat)
+		return (0);
+	if (!phargs.time_sleep)
+		return (0);
+	if (argv[5])
+	{
+		if (!phargs.n_times_eat)
+			return (0);
+	}
+	return (1);
 }
 
 void print_error_args(int n)
