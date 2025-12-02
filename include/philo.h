@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 12:03:56 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/01 17:37:40 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:10:06 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,14 @@
 # include <time.h>
 # include <unistd.h>
 
-/*typedef struct s_philo {
-    pthread_t       *th;
-    unsigned int    phnum;
-}   t_philo;*/
-
 typedef struct s_phargs {
     unsigned int    n_philos;
-    pthread_t       *philo;
-    //t_philo         *philo;
     unsigned int    time_die;
     unsigned int    time_eat;
     unsigned int    time_sleep;
     unsigned int    n_times_eat;
+    pthread_t       *philo;
+    pthread_t       monitor;
 }   t_phargs ;
 
 void print_error_args(int n);
