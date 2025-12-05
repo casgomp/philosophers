@@ -27,7 +27,11 @@ LDFLAGS_PHILO   := -pthread
 vpath %.c $(SRC_DIR)
 
 SRCS_MAND		:=	main.c \
+					threads.c \
+					monitor.c \
+					philosophers.c \
 					time.c \
+					utils.c \
 
 SRC_BONUS		:=
 
