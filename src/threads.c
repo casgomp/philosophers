@@ -21,14 +21,12 @@ int	create_threads(t_phargs *phargs)
     if (pthread_create((&phargs->monitor), NULL, &routine_monitor, phargs) != 0)
 		return (perror("Failed to create thread"), 0);
     printf("monitor has started\n");
-	phargs->philo = malloc(sizeof(pthread_t) * phargs->n_philos);
-	if (!phargs->philo)
-		return (0);
 	i = 0;
 	while (i < phargs->n_philos)
 	{
-		phargs->idx_philo = i;
-		if (pthread_create((phargs->philo + i), NULL, &routine_philo, phargs) != 0)
+		(phargs->philos[i]).phargs = phargs;
+		phargs->philos[i].idxph = i;
+		if (pthread_create(&(phargs->philos[i].thrph), NULL, &routine_philo, &phargs->philos[i]) != 0)
 			return (perror("Failed to create thread"), 0);
 		printf("philosopher %d has started\n", i + 1);
 		i ++;
@@ -39,7 +37,7 @@ int	create_threads(t_phargs *phargs)
 	i = 0;
 	while (i < phargs->n_philos)
 	{
-		if (pthread_join(phargs->philo[i], (void **)&retval) != 0 || (uintptr_t)retval == 0)
+		if (pthread_join(phargs->philos[i].thrph, (void **)&retval) != 0 || (uintptr_t)retval == 0)
 			return (0);
 		printf("philosopher %d has finished execution\n", i + 1);
 		i ++;

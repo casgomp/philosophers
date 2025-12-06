@@ -13,6 +13,15 @@
 #include "philo.h"
 #include <limits.h>
 
+int	philo_init_atoi(char *arg, unsigned int *dest)
+{
+	int	error;
+
+	error = 0;
+	*dest = ft_atoi_safe(arg, &error);
+	return (!error);
+}
+
 int	ft_atoi_safe(const char *nptr, int *error)
 {
 	unsigned int	i;

@@ -28,42 +28,28 @@ int	main(int argc, char **argv)
 
 int	philo_init(t_phargs *phargs, char **argv)
 {
-	phargs->n_philos = philo_init_atoi(argv[1]);
-	if (!phargs->n_philos)
+	if (!philo_init_atoi(argv[1], &(phargs->n_philos)))
 		return (0);
-	phargs->time_die = philo_init_atoi(argv[2]);
-	if (!phargs->time_die)
+	if (!philo_init_atoi(argv[2], &(phargs->time_die)))
 		return (0);
-	phargs->time_eat = philo_init_atoi(argv[3]);
-	if (!phargs->time_eat)
+	if (!philo_init_atoi(argv[3], &(phargs->time_eat)))
 		return (0);
-	phargs->time_sleep = philo_init_atoi(argv[4]);
-	if (!phargs->time_sleep)
+	if (!philo_init_atoi(argv[4], &(phargs->time_sleep)))
 		return (0);
 	phargs->n_times_eat = -1;
-	if (argv[5])
-	{
-		phargs->n_times_eat = philo_init_atoi(argv[5]);
-		if (!phargs->n_times_eat)
-			return (0);
-	}
-	phargs->time_start = get_time_current();
-	phargs->idx_philo = 0;
-	phargs->eaten = malloc(sizeof(t_eat) * phargs->n_philos);
-	if (!phargs->eaten)
+	if (argv[5] && !philo_init_atoi(argv[5], (unsigned int *)&(phargs->n_times_eat)))
 		return (0);
-	memset(phargs->eaten, 0, sizeof(*phargs->eaten));
+	phargs->time_start = get_time_current();
+	if (philo_init_philos(phargs) == 0)
+		return (0);
 	return (1);
 }
 
-int	philo_init_atoi(char *arg)
+int	philo_init_philos(t_phargs *phargs)
 {
-	unsigned int	nbr;
-	int				error;
-
-	error = 0;
-	nbr = ft_atoi_safe(arg, &error);
-	if (!nbr && error == 1)
+	phargs->philos = malloc(sizeof(t_philo) * phargs->n_philos);
+	if (!phargs->philos)
 		return (0);
-	return ((int)nbr);
+	memset(phargs->philos, 0, sizeof(t_philo) * phargs->n_philos);
+	return (1);
 }
