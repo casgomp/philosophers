@@ -14,23 +14,18 @@
 
 void	*routine_philo(void *arg)
 {
-    //unsigned int    i;
-    t_phargs        *phargs;
+    t_philo        *philos;
+    unsigned int    idx;
 
-    phargs = (t_phargs *)arg;
-    /*i = 0;
-    while (i < (unsigned int)phargs->n_times_eat)
-    {
-        (phargs->eaten[phargs->idx_philo].ntimes) ++;
-        printf("philo %d has eaten %d times\n", phargs->idx_philo + 1, phargs->eaten[phargs->idx_philo].ntimes);
-        i ++;
-    }*/
+    philos = (t_philo *)arg;
     while (1)
     {
-        pthread_mutex_lock(&phargs->mutex1);
-        (phargs->eaten[phargs->idx_philo].ntimes) ++;
-        printf("philo %d has eaten %d times\n", phargs->idx_philo + 1, phargs->eaten[phargs->idx_philo].ntimes);
-        pthread_mutex_unlock(&phargs->mutex1);
+        pthread_mutex_lock(&philos->phargs->mutex1);
+        idx = philos->idxph;
+        printf("idx = %d. philosphernumber= %d\n", idx, idx + 1);
+        (philos->ntimeeat) ++;
+        printf("philo %d has eaten %d times\n", idx + 1, philos->ntimeeat);
+        pthread_mutex_unlock(&philos->phargs->mutex1);
         usleep(3000000);
     }
 	return ((void *)(long)1);

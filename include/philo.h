@@ -22,11 +22,22 @@
 # include <time.h>
 # include <unistd.h>
 
-typedef struct s_eat
+/*typedef struct s_eat
 {
-    unsigned int    time_last_eat;
+    unsigned int    tlast;
     unsigned int    ntimes;
-}   t_eat;
+}   t_eat;*/
+
+typedef struct s_phargs t_phargs;
+
+typedef struct  s_philo
+{
+    pthread_t       thrph;
+    unsigned int    idxph;
+    unsigned int    tlasteat;
+    unsigned int    ntimeeat;
+    t_phargs        *phargs;
+}   t_philo;
 
 typedef struct s_phargs {
     unsigned int    n_philos;
@@ -35,28 +46,25 @@ typedef struct s_phargs {
     unsigned int    time_sleep;
     int             n_times_eat;
     unsigned int    time_start;
-    pthread_t       *philo;
-    unsigned int    idx_philo;
-    t_eat           *eaten;
+    t_philo         *philos;
     pthread_t       monitor;
     pthread_mutex_t mutex1; //do separate struct containing various mutexes?
 }   t_phargs ;
 
 int             main(int argc, char **argv);
 int             philo_init(t_phargs *phargs, char **argv);
-int             philo_init_atoi(char *arg);
+int	            philo_init_philos(t_phargs *phargs);
 
 int             create_threads(t_phargs *phargs);
 
-void            *routine_monitor();
+void            *routine_monitor(void *arg);
 
-void            *routine_philo();
-
-int             monitor(t_phargs *phargs);
+void            *routine_philo(void *arg);
 
 int             get_time_epoch(void);
 int             get_time_current(void);
 
+int	            philo_init_atoi(char *arg, unsigned int *dest);
 int	            ft_atoi_safe(const char *nptr, int *error);
 unsigned int	ft_atoi_safe_digit(const char *nptr, int i, int *error, int sign);
 void            print_error_args(int n);
