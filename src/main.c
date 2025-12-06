@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:59:23 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/05 20:12:12 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/06 13:44:47 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	philo_init(t_phargs *phargs, char **argv)
 			return (0);
 	}
 	phargs->time_start = get_time_current();
+	phargs->idx_philo = 0;
 	phargs->eaten = malloc(sizeof(t_eat) * phargs->n_philos);
 	if (!phargs->eaten)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 12:03:56 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/05 20:12:19 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/06 13:44:47 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 typedef struct s_eat
 {
-    unsigned int    *time_last_eat;
-    unsigned int    *ntimes;
+    unsigned int    time_last_eat;
+    unsigned int    ntimes;
 }   t_eat;
 
 typedef struct s_phargs {
@@ -35,9 +35,11 @@ typedef struct s_phargs {
     unsigned int    time_sleep;
     int             n_times_eat;
     unsigned int    time_start;
-    t_eat           *eaten;
     pthread_t       *philo;
+    unsigned int    idx_philo;
+    t_eat           *eaten;
     pthread_t       monitor;
+    pthread_mutex_t mutex1; //do separate struct containing various mutexes?
 }   t_phargs ;
 
 int             main(int argc, char **argv);
