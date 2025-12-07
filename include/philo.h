@@ -35,7 +35,7 @@ typedef struct  s_philo
     pthread_t       thrph;
     unsigned int    idxph;
     unsigned int    tlasteat;
-    unsigned int    ntimeeat;
+    unsigned int    ntimeeat; //make _Atomic type to ensure monitor doesnt start reading while philo[i] is writing or viceversa (i.e. prevent race condition).
     t_phargs        *phargs;
 }   t_philo;
 

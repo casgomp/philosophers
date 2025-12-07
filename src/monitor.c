@@ -40,5 +40,5 @@ void *routine_monitor(void *arg)
             return ((void *)(uintptr_t)0);//why return 0?
         }
     }
-    return ((void *)(uintptr_t)1);
+    return ((void *)(uintptr_t)1);//why return 1?
 }
