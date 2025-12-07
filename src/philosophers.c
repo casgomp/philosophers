@@ -22,7 +22,7 @@ void	*routine_philo(void *arg)
     {
         pthread_mutex_lock(&philos->phargs->mutex1);
         idx = philos->idxph;
-        printf("idx = %d. philosphernumber= %d\n", idx, idx + 1);
+        printf("idx = %d. philosopher number= %d\n", idx, idx + 1);
         (philos->ntimeeat) ++;
         printf("philo %d has eaten %d times\n", idx + 1, philos->ntimeeat);
         pthread_mutex_unlock(&philos->phargs->mutex1);
