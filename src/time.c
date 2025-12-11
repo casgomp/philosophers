@@ -6,13 +6,13 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 16:12:45 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/06 13:44:50 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/11 20:33:46 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int get_time_epoch(void)
+int get_time_absolute(void)
 {
     struct timeval  tv;
     unsigned int    time_epoch;
@@ -23,13 +23,12 @@ int get_time_epoch(void)
     return ((int)time_epoch);
 }
 
-int get_time_current(void)
+int get_time_relative(t_phargs *phargs)
 {
-    struct timeval  tv;
-    unsigned int    time_current;
+    unsigned int    time_absolute;
+    unsigned int    time_relative;
 
-    if (gettimeofday(&tv, NULL) == -1)
-        return (0); //perror
-    time_current = ((tv.tv_sec * 1000) + (tv.tv_usec / 1000)) - get_time_epoch();
-    return ((int)time_current);
+    time_absolute = get_time_absolute();
+    time_relative = time_absolute - phargs->time_start;
+    return ((int)time_relative);
 }
