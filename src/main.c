@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:59:23 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/12 15:24:48 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:11:07 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ int	main(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (print_error_args(), 1);
 	if (!philo_init(&phargs, argv))
-		return (1); //call cleanup function before returning.
+		return (cleanup(&phargs), 1);
 	if (phargs.n_philos <= 0)
-		return (print_error_args(), 1); //call cleanup function before returning.
+		return (print_error_args(), cleanup(&phargs), 1);
 	if (!create_threads(&phargs))
-		return (1); //call cleanup function before returning.//
-	//cleanup function
-	return (0);
+		return (cleanup(&phargs), 1);
+	return (cleanup(&phargs), 0);
 }
 
 int	philo_init(t_phargs *phargs, char **argv)

@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 16:57:38 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/12 15:45:38 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:12:16 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	*routine_philo(void *arg)
         print_critical(philos, "has taken a fork");
         if (philos->phargs->n_philos == 1)
             state_critical(philos->phargs);
-        //if (check_state(philos) == 1)
-        if (philos->phargs->state == 1)
+        //if (philos->phargs->state == 1)
+        if (check_state(philos) == 1)
             return (pthread_mutex_unlock(fork_low), (void *)(long)0);
         pthread_mutex_lock(fork_high);
         print_critical(philos, "has taken a fork");
@@ -70,18 +70,11 @@ void	*routine_philo(void *arg)
         pthread_mutex_unlock(fork_high);
         pthread_mutex_unlock(fork_low);
         
-        if (check_state(philos) == 1)
+        if (philos->phargs->state == 1)
+        //if (check_state(philos) == 1)
             return ((void *)(long)0);
         print_critical(philos, "is sleeping");
         usleep(philos->phargs->time_sleep * 1000);
-
-        /*if ((philos->phargs->n_times_eat != -1) && ((int)philos->nteaten == philos->phargs->n_times_eat))
-            break ;*/
-        
-        /*pthread_mutex_lock(&philos->phargs->mutxstate);
-        if (philos->phargs->state == 1)
-            return (pthread_mutex_unlock(&philos->phargs->mutxstate), (void *)(long)1);
-        pthread_mutex_unlock(&philos->phargs->mutxstate);*/
     }
 	return ((void *)(long)1);
 }

@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 14:43:26 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/12 15:41:02 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 16:44:15 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void *routine_monitor(void *arg)
         {
             t_since_meal = get_time_relative(phargs) - phargs->philos[i].tlasteat;
             //if (t_since_meal >= phargs->time_die)
-            if (t_since_meal >= phargs->time_die || check_state(&phargs->philos[0]) == 1)
+            //if (t_since_meal >= phargs->time_die || check_state(&phargs->philos[0]) == 1)
+            if (t_since_meal >= phargs->time_die || phargs->state == 1)
             {
                 state_critical(phargs);
                 phargs->dead = phargs->philos[i].idxph;
@@ -37,7 +38,7 @@ void *routine_monitor(void *arg)
             }
             if ((phargs->n_times_eat) != -1)
             {
-                if (phargs->philos[i].nteaten == (unsigned int)phargs->n_times_eat)
+                if (phargs->philos[i].nteaten >= (unsigned int)phargs->n_times_eat)
                     count ++;
             }
             i ++;

@@ -33,6 +33,7 @@ SRCS_MAND		:=	main.c \
 					time.c \
 					utils.c \
 					utils2.c \
+					cleanup.c \
 
 SRC_BONUS		:=
 
