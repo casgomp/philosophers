@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 12:03:56 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/11 20:33:56 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 15:49:16 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,25 @@ typedef struct  s_philo
 {
     pthread_t               thrph;
     unsigned int            idxph;
-    unsigned int            tlasteat;
+    _Atomic unsigned int    tlasteat;
     _Atomic unsigned int    nteaten;
     t_phargs                *phargs;
 }   t_philo;
 
 typedef struct s_phargs {
-    unsigned int    n_philos;
-    unsigned int    time_die;
-    unsigned int    time_eat;
-    unsigned int    time_sleep;
-    int             n_times_eat;
-    unsigned int    time_start;
-    unsigned int    state;
-    t_philo         *philos;
-    pthread_t       monitor;
-    pthread_mutex_t *mutxfrk;
-    pthread_mutex_t mutxstate;
-    pthread_mutex_t mutxprint;
+    unsigned int            n_philos;
+    unsigned int            time_die;
+    unsigned int            time_eat;
+    unsigned int            time_sleep;
+    int                     n_times_eat;
+    unsigned int            time_start;
+    _Atomic unsigned int    state;
+    unsigned int            dead;//
+    t_philo                 *philos;
+    pthread_t               monitor;
+    pthread_mutex_t         *mutxfrk;
+    pthread_mutex_t         mutxstate;
+    pthread_mutex_t         mutxprint;
 }   t_phargs ;
 
 int             main(int argc, char **argv);
@@ -65,9 +66,12 @@ int             get_time_relative(t_phargs *phargs);
 int	            philo_init_atoi(char *arg, unsigned int *dest);
 int	            ft_atoi_safe(const char *nptr, int *error);
 unsigned int	ft_atoi_safe_digit(const char *nptr, int i, int *error, int sign);
-void            print_error_args(int n);
-void            print_critical(t_philo *philos, char *str);
 
+//void            print_error_args(int n);
+void            print_error_args(void);
+void            print_critical(t_philo *philos, char *str);
 void            state_critical(t_phargs *phargs);
+int             check_state(t_philo *philos);
+void	        print_end_simulation(t_phargs *phargs, void *retval);
 
 #endif
