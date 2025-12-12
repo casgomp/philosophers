@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 16:12:45 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/12 15:46:49 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:42:38 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int get_time_absolute(void)
     unsigned int    time_epoch;
 
     if (gettimeofday(&tv, NULL) == -1)
-        return (0); //perror
+        return (0);
     time_epoch = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
     return ((int)time_epoch);
 }
