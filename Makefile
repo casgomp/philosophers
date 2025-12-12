@@ -32,6 +32,7 @@ SRCS_MAND		:=	main.c \
 					philosophers.c \
 					time.c \
 					utils.c \
+					utils2.c \
 
 SRC_BONUS		:=
 
