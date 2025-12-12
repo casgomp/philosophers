@@ -6,11 +6,11 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:59:23 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/12 18:41:05 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:01:01 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 int	main(int argc, char **argv)
 {
@@ -38,7 +38,8 @@ int	philo_init(t_phargs *phargs, char **argv)
 	if (!philo_init_atoi(argv[4], &(phargs->time_sleep)))
 		return (0);
 	phargs->n_times_eat = -1;
-	if (argv[5] && !philo_init_atoi(argv[5], (unsigned int *)&(phargs->n_times_eat)))
+	if (argv[5] && !philo_init_atoi(argv[5], 
+			(unsigned int *)&(phargs->n_times_eat)))
 		return (0);
 	phargs->time_start = get_time_absolute();
 	phargs->state = 0;
@@ -60,7 +61,7 @@ int	philo_init_philos(t_phargs *phargs)
 
 int	philo_init_mutxs(t_phargs *phargs)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	phargs->mutxfrk = malloc(sizeof(pthread_mutex_t) * phargs->n_philos);
 	if (!phargs->mutxfrk)
