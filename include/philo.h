@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 12:03:56 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/12 15:49:16 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:11:11 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ void            print_critical(t_philo *philos, char *str);
 void            state_critical(t_phargs *phargs);
 int             check_state(t_philo *philos);
 void	        print_end_simulation(t_phargs *phargs, void *retval);
+
+void            cleanup(t_phargs *phargs);
 
 #endif
