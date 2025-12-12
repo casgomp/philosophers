@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 12:03:56 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/12 17:11:11 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:40:43 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_phargs {
     int                     n_times_eat;
     unsigned int            time_start;
     _Atomic unsigned int    state;
-    unsigned int            dead;//
+    unsigned int            dead;
     t_philo                 *philos;
     pthread_t               monitor;
     pthread_mutex_t         *mutxfrk;
@@ -55,10 +55,13 @@ int	            philo_init_philos(t_phargs *phargs);
 int	            philo_init_mutxs(t_phargs *phargs);
 
 int             create_threads(t_phargs *phargs);
+void	        create_threads_init_philos(t_phargs *phargs);
 
 void            *routine_monitor(void *arg);
 
 void            *routine_philo(void *arg);
+unsigned int    routine_philo_loop(t_philo *philos, pthread_mutex_t *fork_low, pthread_mutex_t *fork_high);
+unsigned int    philo_has_two_forks(t_philo *philos, pthread_mutex_t *fork_low, pthread_mutex_t *fork_high);
 
 int             get_time_absolute(void);
 int             get_time_relative(t_phargs *phargs);
@@ -67,7 +70,6 @@ int	            philo_init_atoi(char *arg, unsigned int *dest);
 int	            ft_atoi_safe(const char *nptr, int *error);
 unsigned int	ft_atoi_safe_digit(const char *nptr, int i, int *error, int sign);
 
-//void            print_error_args(int n);
 void            print_error_args(void);
 void            print_critical(t_philo *philos, char *str);
 void            state_critical(t_phargs *phargs);

@@ -6,7 +6,7 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:59:23 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/12 17:11:07 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:41:05 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ int	philo_init(t_phargs *phargs, char **argv)
 		return (0);
 	if (philo_init_mutxs(phargs) == 0)
 		return (0);
-	if (pthread_mutex_init(&phargs->mutxstate, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&phargs->mutxprint, NULL) != 0)
-		return (0);
 	return (1);
 }
 
@@ -84,5 +80,9 @@ int	philo_init_mutxs(t_phargs *phargs)
 		}
 		i ++;
 	}
+	if (pthread_mutex_init(&phargs->mutxstate, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&phargs->mutxprint, NULL) != 0)
+		return (0);
 	return (1);
 }

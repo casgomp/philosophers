@@ -6,20 +6,18 @@
 /*   By: pecastro <pecastro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 20:24:52 by pecastro          #+#    #+#             */
-/*   Updated: 2025/12/12 14:42:17 by pecastro         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:42:47 by pecastro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <limits.h>
 
-//void print_error_args(int n)
 void print_error_args(void)
 {
 	char	**msg;
 
 	msg = NULL;
-	//if (n == 1)
 	{
 		msg = malloc(sizeof(char *) * 7);
 		if (!msg)
