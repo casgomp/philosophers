@@ -35,3 +35,5 @@ Key things learned from this project:
 ### Useful sources:
 - These video tutorials about [threads](https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2).
 
+### Testing:
+- Besides using valgrind for memory leaks, helgrind is useful to detect race conditions (`valgrind --tool=helgrind ./exec args`) .
