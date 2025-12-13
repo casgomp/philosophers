@@ -27,13 +27,14 @@ The [philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_pro
 
 ### Learning process:
 Key things learned from this project:
-- Threads.
+- Threads
 - Race conditions
-- Deadlocks: To prevent them I used the resource ordering solution.
+- Deadlocks: To prevent them I used the resource ordering solution
 - Mutexes
+- Parallelism and concurrency
 
 ### Useful sources:
 - These video tutorials about [threads](https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2).
 
 ### Testing:
-- Besides using valgrind for memory leaks, helgrind is useful to detect race conditions (`valgrind --tool=helgrind ./exec args`) .
+- Besides using valgrind for memory leaks, helgrind is useful to detect race conditions and other thread errors (`valgrind --tool=helgrind ./exec args`) .
